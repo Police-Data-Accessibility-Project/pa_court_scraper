@@ -23,7 +23,7 @@ def get_docket_number_info(docket_number):
     return response.json()
 
 def get_docket_numbers() -> list[str]:
-    with open("docket_numbers_from_yesterday.txt", "r") as f:
+    with open("data/docket_numbers_from_yesterday.txt", "r") as f:
         docket_numbers = f.read().splitlines()
         return docket_numbers
 
@@ -40,7 +40,7 @@ if __name__ == "__main__":
             continue
 
         try:
-            print(f"Processing docket number: {key}")
+            print(f"Processing docket number: {key}", flush=True)
             content = get_docket_number_info(key)
             insert_into_mongodb(content)
         except Exception as e:
@@ -48,7 +48,7 @@ if __name__ == "__main__":
             raise e
         cache.set(key, True)
         random_wait_time = random.randint(5, 15)
-        print(f"Sleeping for {random_wait_time} seconds")
+        print(f"Sleeping for {random_wait_time} seconds", flush=True)
         time.sleep(random_wait_time)
 
 

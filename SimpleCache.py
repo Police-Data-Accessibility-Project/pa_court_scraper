@@ -7,13 +7,13 @@ class SimpleCache:
 
     def load_from_file(self):
         # Load from JSON
-        with open("cache.json", "r") as f:
+        with open("data/cache.json", "r") as f:
             self.cache = json.loads(f.read())
 
 
     def save_to_file(self):
         # Save as JSON
-        with open("cache.json", "w") as f:
+        with open("data/cache.json", "w") as f:
             f.write(json.dumps(self.cache))
 
     def get(self, key):

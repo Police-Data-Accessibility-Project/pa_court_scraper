@@ -1,22 +1,34 @@
 # pa_court_scraper
 Court Scraper for Pennsylvania
 
-
+# Installation
+While there is a requirements.txt file, that is used within the Python Dockerfile, not by the user directly.
+Instead, the user only needs to install the `docker` package
 ```shell
-docker run -d --name mongodb -p 27017:27017 mongo:latest
+pip install docker
 ```
 
-Install requirements
-
+# Commands
+Get Docket Numbers
+- This script parses the webpage and writes the docket numbers to a text file.
+- The text file is located at `data/docket_numbers_from_yesterday.txt`.
 ```shell
-pip install -r requirements.txt
-playwright install chromium
+python main.py get-docket-numbers
 ```
 
-Run `get_docket_numbers_from_yesterday.py` to retrieve all docket numbers filed on the previous day.
-
-Run `get_docket_info.py` to retrieve information about each docket number.
+Get Docket Information
+- This script retrieves all docket information from the above text file and stores it in a MongoDB database.
+- The MongoDB database is located at `mongodb://mongo:27017/`.
+  - Currently, the database is "mydatabase", and the collection is "mycollection". 
 - Note that this script takes an extended period of time to run, as requests are staggered to avoid rate-limiting.
+  - To reduce the number of docket numbers retrieved, delete docket numbers from the text file
+```shell
+python main.py get-docket-info
+```
 
-While `get_docket_info` is running, the MongoDB database can be inspected using an application such as [MongoDBCompass](https://www.mongodb.com/products/tools/compass).
-- Currently, the database is "mydatabase", and the collection is "mycollection".
+Stop MongoDB instance
+- The MongoDB instance does not stop automatically after the above two commands are run
+- The below command will stop and remove the MongoDB container (deleting all data within it)
+```shell
+python main.py stop-mongodb
+```

@@ -3,7 +3,7 @@ from pymongo import MongoClient
 # Connect to MongoDB running inside Docker
 
 def get_collection(db_name: str = "mydatabase", collection_name: str = "mycollection"):
-    mongo_uri = "mongodb://localhost:27017/"  # Use localhost since the container exposes the port
+    mongo_uri = "mongodb://host.docker.internal:27017/"  # Use localhost since the container exposes the port
     client = MongoClient(mongo_uri)
     db = client[db_name]
 

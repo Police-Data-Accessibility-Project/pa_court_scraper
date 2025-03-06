@@ -46,14 +46,17 @@ async def main():
 
     yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
 
+    print(f"Scraping docket numbers from {yesterday}")
     scraped_data = await perform_action_and_scrape(date=yesterday)
 
     # Get all data which matches regex '<td>(MJ[^<]*)<\/td>'
     matches = [match.group(1) for match in re.finditer(r'<td>(MJ[^<]*)<\/td>', scraped_data)]
 
     # Write, separated by lines, to a text file
-    with open("docket_numbers_from_yesterday.txt", "w") as f:
+    with open("data/docket_numbers_from_yesterday.txt", "w") as f:
         f.write("\n".join(matches))
+
+    print("Successfully wrote docket numbers to file")
 
 
 # Run the script
