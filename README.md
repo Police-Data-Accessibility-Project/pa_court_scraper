@@ -10,6 +10,7 @@ Install requirements
 
 ```shell
 pip install -r requirements.txt
+playwright install chromium
 ```
 
 Run `get_docket_numbers_from_yesterday.py` to retrieve all docket numbers filed on the previous day.
