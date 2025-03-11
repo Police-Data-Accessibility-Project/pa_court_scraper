@@ -2,6 +2,15 @@
 Court Scraper for Pennsylvania
 
 # Installation
+
+## Set Up Docker
+Ensure that [Docker](https://docs.docker.com/get-started/get-docker/) is installed on your system. 
+
+Docker ensures that the majority of the application operates inside a "container" that is isolated from the rest of the system.
+
+## Set Up Python
+Ensure that [Python 3.13](https://www.python.org/downloads/release/python-3132/) is installed on your system. 
+
 While there is a requirements.txt file, that is used within the Python Dockerfile, not by the user directly.
 Instead, the user only needs to install the `docker` package
 ```shell
@@ -32,3 +41,9 @@ Stop MongoDB instance
 ```shell
 python main.py stop-mongodb
 ```
+
+
+# Review Results 
+
+Results can be reviewed using [MongoDB Compass](https://www.mongodb.com/try/download/compass). 
+Note that the MongoDB container must be up and running to review results.
